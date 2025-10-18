@@ -1,21 +1,21 @@
 /* Widgets are the building blocks of an APP's interface, they're responsible for 
 describing what the UI of an APP should be like  */
-import 'package:currency_converter/currency_converter_materialpage.dart';
+import 'package:currency_converter/currency_converter_material_page.dart';
 //Relative importing
 //import './currency_converter_materialPage.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart'; - for iOS
 
 void main() {
-  runApp(const Myapp());
+  runApp(const MyApp());
 }
 
 //Types of widget
 /* statelessWidget -  here the state/data is immutable(cannot change)
  statefulWidget -  here the state/data is mutable(can change)
  InheritedWidget */
-class Myapp extends StatelessWidget {
-  const Myapp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     /* return const Text(
@@ -25,7 +25,7 @@ class Myapp extends StatelessWidget {
     //Scaffold takes care of the design of the particular page
     //with scaffold you can add headers, footers etc
     //MaterialApp takes care of the overall theming
-    //Material App looks after the global design meanwhile scaffold handlesmthe local design of the pages
+    //Material App looks after the global design meanwhile scaffold handles the local design of the pages
     return const MaterialApp(home: CurrencyConverterMaterialpage());
   }
 }
