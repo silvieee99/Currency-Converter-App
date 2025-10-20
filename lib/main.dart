@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     //with scaffold you can add headers, footers etc
     //MaterialApp takes care of the overall theming
     //Material App looks after the global design meanwhile scaffold handles the local design of the pages
-    return const MaterialApp(home: CurrencyConverterMaterialpage());
+    return const MaterialApp(home: CurrencyConverterMaterialPage());
   }
 }
 
