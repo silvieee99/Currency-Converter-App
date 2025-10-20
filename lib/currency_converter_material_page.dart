@@ -21,6 +21,19 @@ class _CurrencyConverterMaterialPageState
   //Don't call a controller in a buld function, it will slow it down or make it expensive
 
   final TextEditingController textEditingController = TextEditingController();
+  void convert() {
+    print(textEditingController.text);
+
+    setState(() {
+      result = double.parse(textEditingController.text) * 1500;
+    });
+  }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
+  }
 
   //Init state is what gets executed before the build function
 
@@ -57,30 +70,30 @@ class _CurrencyConverterMaterialPageState
         centerTitle: true,
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, //vertical center
-          //crossAxisAlignment: CrossAxisAlignment.center, //Horizontal center
-          children: [
-            //right click text- then refactor, wrap in container
-            //To remove container and it's properties, right click and select remove widgets
-            Text(
-              // to convert int -> string = integervalue.toString()
-              //to convert string -> int = int.parse(Stringvalue)
-              'NGN $result',
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center, //vertical center
+            //crossAxisAlignment: CrossAxisAlignment.center, //Horizontal center
+            children: [
+              //right click text- then refactor, wrap in container
+              //To remove container and it's properties, right click and select remove widgets
+              Text(
+                // to convert int -> string = integervalue.toString()
+                //to convert string -> int = int.parse(Stringvalue)
+                //result!=0? -> this ternary operator means if result is not = 0 let result be in two decimal places
+                'NGN ${result != 0 ? result.toStringAsFixed(2) : result.toStringAsFixed(0)}', // This will summarize the result's decimal in two places
 
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 40,
-                fontWeight: FontWeight.w600,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 40,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            //Container
-            //Padding
-            //right click on textfield, refactor and select wrap with padding
-            Container(
-              padding: const EdgeInsets.all(10.0),
-              //margin: const EdgeInsets.all(8.0),
-              child: TextField(
+              //Container
+              //Padding
+              //right click on textfield, refactor and select wrap with padding
+              TextField(
                 controller: textEditingController,
                 //You can't add const to a parent widget, "Input Decoration" for example
                 style: const TextStyle(color: Colors.black),
@@ -99,26 +112,18 @@ class _CurrencyConverterMaterialPageState
                   //signed: true,
                 ),
               ),
-            ),
-            //Types of button in material design - 1. Raised 2. Appears like a Text (Text Button)
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: TextButton(
+              const SizedBox(height: 10),
+              //Types of button in material design - 1. Raised 2. Appears like a Text (Text Button)
+              ElevatedButton(
                 //Pass a void function
-                onPressed: () {
-                  /* if (kDebugMode) {
+                onPressed: convert,
+
+                /* if (kDebugMode) {
                     print('clicked me');
                   } */
-                  print(textEditingController.text);
-                  //double.parse converts the string to a double
-
-                  setState(() {
-                    result = double.parse(textEditingController.text) * 1500;
-                  });
-                  //call the build function here
-                  //build(context);
-                },
-
+                //double.parse converts the string to a double
+                //call the build function here
+                //build(context);
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.black,
                   foregroundColor: Colors.white,
@@ -131,31 +136,31 @@ class _CurrencyConverterMaterialPageState
                 //This child text should always be at the end, It's best practice
                 child: const Text('Convert'),
               ),
-            ),
 
-            //borderRadius: BorderRadius.all(Radius.circular(60)),
-            /* borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    topRight: Radius.circular(5),
-                    bottomLeft: Radius.circular(5),
-                    bottomRight: Radius.circular(5),
+              //borderRadius: BorderRadius.all(Radius.circular(60)),
+              /* borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
+                    ), */
+              /* borderRadius: BorderRadius.horizontal(
+                      left: Radius.circular(60),
+                      right: Radius.circular(60),
+                    ), */
+              /* borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(60),
+                      bottom: Radius.circular(60),
+          
                   ), */
-            /* borderRadius: BorderRadius.horizontal(
-                    left: Radius.circular(60),
-                    right: Radius.circular(60),
+              /* suffixIcon: Icon(Icons.monetization_on),
+                  suffixIconColor: Colors.white, */
+              /* label: Text(
+                    "Please Enter the Amount in USD",
+                    style: TextStyle(fontSize: 18, color: Colors.white),
                   ), */
-            /* borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(60),
-                    bottom: Radius.circular(60),
-
-                ), */
-            /* suffixIcon: Icon(Icons.monetization_on),
-                suffixIconColor: Colors.white, */
-            /* label: Text(
-                  "Please Enter the Amount in USD",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ), */
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -173,3 +178,4 @@ class CurrencyConverterMaterialpagee extends StatelessWidget {
     
   }
 } */
+//A constant behind a widget simply means the widget doesn't need a rebuild
